@@ -205,6 +205,24 @@ cd ~/SR-IMX93/yocto
 ls
 ```
 
+### 开发主机工具版本确定
+
+在Ubuntu 开发主机上安装指定版本的 tar 工具。
+
+```bash
+sudo apt install tar=1.34+dfsg-1build3
+dpkg -l tar 
+```
+
+预期结果
+```bash
+ii  tar            1.34+dfsg-1build3 amd64        GNU version of the tar archiving utility
+```
+> [!TIP]
+>
+> 若使用 Docker 容器隔离构建环境，可跳过本步骤；但容器基础镜像若同为 Ubuntu 22.04，容器内仍需固定 tar 版本。
+
+
 > [!NOTE]
 >
 > 目录中应包含 `sources`、`setup-environment` 等文件和目录。
@@ -298,10 +316,8 @@ MACHINE="quectel-srg093xw"
 **步骤 4：编译系统镜像**
 
 ```bash
-bitbake <image-name>
+./build.sh  SRG093X -v SRG093X_V01 -d build_srg093x 
 ```
-
-其中，`<image-name>` 为 SDK 提供的系统镜像 Recipe，请根据实际发布的 SDK 配置填写。
 
 > [!TIP]
 >
